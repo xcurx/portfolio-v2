@@ -18,11 +18,13 @@ export function Navbar() {
     <motion.header
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
-        backgroundColor: scrolled ? "rgba(10, 10, 10, 0.85)" : "transparent",
-        backdropFilter: scrolled ? "blur(12px)" : "none",
-        borderBottom: scrolled
-          ? "1px solid rgba(255,255,255,0.08)"
-          : "1px solid transparent",
+        backgroundColor:
+          scrolled || mobileOpen ? "rgba(10, 10, 10, 0.85)" : "transparent",
+        backdropFilter: scrolled || mobileOpen ? "blur(12px)" : "none",
+        borderBottom:
+          scrolled || mobileOpen
+            ? "1px solid rgba(255,255,255,0.08)"
+            : "1px solid transparent",
       }}
       initial={{ y: -80 }}
       animate={{ y: 0 }}
@@ -92,12 +94,12 @@ export function Navbar() {
       {/* Mobile menu */}
       {mobileOpen && (
         <motion.div
-          className="md:hidden border-t border-border bg-[rgba(10,10,10,0.95)] backdrop-blur-xl"
+          className="md:hidden border-t border-border py-4"
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}
         >
-          <div className="container-main py-6 flex flex-col gap-4">
+          <div className="container-main flex flex-col gap-4">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -108,7 +110,7 @@ export function Navbar() {
                 {link.label}
               </a>
             ))}
-            <div className="flex gap-3 pt-4 border-t border-border">
+            <div className="flex gap-3 py-3 border-t border-border">
               <a
                 href={personalInfo.github}
                 target="_blank"
