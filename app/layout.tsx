@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sujal Kachhawah — Fullstack Developer",
+  title: "Sujal Kachhawah",
   description:
     "Fullstack developer specializing in Next.js, Go, WebSockets, and AI. Won Smart India Hackathon 2025. Building real-time systems for the web.",
   keywords: [

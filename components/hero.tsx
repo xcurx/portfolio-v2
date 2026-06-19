@@ -128,10 +128,10 @@ export function Hero() {
             >
               <span className="relative inline-block">
               <span className="bg-gradient-to-r from-accent to-accent/80 text-transparent bg-clip-text">
-                {personalInfo.name}
+                {personalInfo.name}.
               </span>
               <ShinyText
-                text={personalInfo.name}
+                text={personalInfo.name+"."}
                 color="transparent"
                 shineColor="rgba(255,255,255,0.7)"
                 speed={3}
