@@ -141,11 +141,15 @@ export const skills: SkillCategory[] = [
   },
   {
     name: "Frontend / UI",
-    items: ["React.js", "Next.js", "Tailwind CSS", "shadcn/ui"],
+    items: ["React.js", "Next.js", "Tailwind CSS", "shadcn/ui", "Framer Motion"],
   },
   {
-    name: "Backend / Infra",
-    items: ["Node.js (Express)", "Golang", "FastAPI", "Prisma ORM", "Docker"],
+    name: "Backend",
+    items: ["Node.js", "Express.js", "Golang", "FastAPI", "Prisma ORM"],
+  },
+  {
+    name: "Devops / Infra",
+    items: ["Docker", "Kubernetes", "Terraform"],
   },
   {
     name: "Databases",

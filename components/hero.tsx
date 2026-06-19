@@ -3,6 +3,7 @@
 import { personalInfo } from "@/lib/data";
 import { motion } from "motion/react";
 import { useEffect, useRef } from "react";
+import ShinyText from "./shiny-text";
 
 function OscilloscopeCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -125,7 +126,18 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
             >
-              <span className="text-accent">{personalInfo.firstName}.</span>
+              <span className="relative inline-block">
+              <span className="bg-gradient-to-r from-accent to-accent/80 text-transparent bg-clip-text">
+                {personalInfo.name}
+              </span>
+              <ShinyText
+                text={personalInfo.name}
+                color="transparent"
+                shineColor="rgba(255,255,255,0.7)"
+                speed={3}
+                className="absolute inset-0 z-10 pointer-events-none"
+              />
+            </span>
               <br />
               <span className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.2rem]">
                 Building real-time
@@ -196,7 +208,7 @@ export function Hero() {
       {/* Bottom dots row */}
       <div className="container-main">
         <motion.div
-          className="flex items-center gap-3 pb-4"
+          className="flex items-center gap-3 pb-4 mt-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.8 }}
