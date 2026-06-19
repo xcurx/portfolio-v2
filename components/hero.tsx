@@ -190,6 +190,9 @@ export function Hero() {
               <a href="#projects" className="btn-ghost">
                 View projects
               </a>
+              <a href="https://drive.google.com/file/d/1tnAEAhTIx6xYi5oGjf7GVOXPFrkHNlAU/view?usp=sharing" target="_blank" className="btn-ghost">
+                View Resume
+              </a>
             </motion.div>
           </div>
 
