@@ -111,7 +111,7 @@ export function Hero() {
         <div className="flex items-center gap-4 py-5 text-fg-dim font-mono text-[11px] tracking-wider">
           <span>// FULLSTACK DEVELOPER</span>
           <span className="flex-1 h-px bg-[var(--border)]" />
-          <span>// IIIT NAGPUR</span>
+          <span>//</span>
         </div>
       </div>
 
