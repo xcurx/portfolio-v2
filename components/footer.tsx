@@ -29,8 +29,8 @@ function LinkedinIcon({ className }: { className?: string }) {
 
 export function Footer() {
   return (
-    <footer className="border-t border-border">
-      <div className="container-main py-10">
+    <footer className="border-t border-border py-2">
+      <div className="container-main">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Left: Branding */}
           <div className="flex items-center gap-3">
