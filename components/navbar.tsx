@@ -94,7 +94,7 @@ export function Navbar() {
       {/* Mobile menu */}
       {mobileOpen && (
         <motion.div
-          className="md:hidden border-t border-border py-4"
+          className="md:hidden border-t border-border pt-4"
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}
