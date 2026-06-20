@@ -106,9 +106,9 @@ export function ExperienceSection() {
                   {exp.bullets.map((bullet) => (
                     <li
                       key={bullet}
-                      className="flex items-end gap-2 text-sm text-fg-muted leading-relaxed"
+                      className="flex items-start gap-2 text-sm text-fg-muted leading-relaxed"
                     >
-                      <span className="text-accent mt-1 shrink-0">&gt;</span>
+                      <span className="text-accent shrink-0">&gt;</span>
                       <span>{bullet}</span>
                     </li>
                   ))}
