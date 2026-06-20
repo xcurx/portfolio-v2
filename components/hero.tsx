@@ -231,15 +231,19 @@ export function Hero() {
 
       {/* Feature strip */}
       <div className="border-t border-b border-border bg-[var(--bg-elevated)]">
-        <div className="container-main">
+        {/* Desktop: static grid */}
+        <div className="container-main hidden md:block">
           <motion.ul
-            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 divide-x divide-border"
+            className="grid grid-cols-5"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.9, ease: [0.25, 0.4, 0.25, 1] }}
           >
-            {highlights.map((h) => (
-              <li key={h.num} className="py-5 px-4 first:pl-0">
+            {highlights.map((h, i) => (
+              <li
+                key={h.num}
+                className={`py-5 px-4 ${i > 0 ? "border-l border-border" : "pl-0"}`}
+              >
                 <span className="block font-mono text-[10px] text-fg-dim mb-1 tracking-widest">
                   {h.num}
                 </span>
@@ -252,6 +256,35 @@ export function Hero() {
               </li>
             ))}
           </motion.ul>
+        </div>
+
+        {/* Mobile: auto-scrolling marquee */}
+        <div className="md:hidden overflow-hidden">
+          <motion.div
+            className="marquee-strip"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.9 }}
+          >
+            <ul className="marquee-track" aria-label="Highlights">
+              {[...highlights, ...highlights].map((h, i) => (
+                <li
+                  key={`${h.num}-${i}`}
+                  className={`shrink-0 py-5 px-5 ${i > 0 ? "border-l border-border" : ""}`}
+                >
+                  <span className="block font-mono text-[10px] text-fg-dim mb-1 tracking-widest">
+                    {h.num}
+                  </span>
+                  <span className="block font-mono text-xs font-bold uppercase tracking-wider text-foreground mb-1 whitespace-nowrap">
+                    {h.label}
+                  </span>
+                  <span className="block text-[11px] text-fg-muted leading-snug whitespace-nowrap">
+                    {h.desc}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
         </div>
       </div>
 
