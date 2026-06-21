@@ -3,6 +3,7 @@
 import { AnimatedSection } from "@/components/animated-section";
 import { SectionHeader } from "@/components/section-header";
 import { projects } from "@/lib/data";
+import { useTheme } from "@/components/theme-provider";
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 import { ExternalLink } from "lucide-react";
@@ -29,6 +30,8 @@ function ProjectCard({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
+  const { accentRgb } = useTheme();
+  const { r, g, b } = accentRgb;
 
   // Unique visual patterns for each project card
   const patterns = [
@@ -42,9 +45,9 @@ function ProjectCard({
             style={{
               background:
                 i < 3
-                  ? "rgba(234, 255, 0, 0.15)"
+                  ? `rgba(${r},${g},${b},0.15)`
                   : i < 6
-                    ? "rgba(234, 255, 0, 0.08)"
+                    ? `rgba(${r},${g},${b},0.08)`
                     : "rgba(255, 255, 255, 0.04)",
             }}
             animate={{
@@ -79,9 +82,9 @@ function ProjectCard({
           width="50"
           height="40"
           rx="4"
-          stroke="rgba(234, 255, 0, 0.4)"
+          stroke={`rgba(${r},${g},${b},0.4)`}
           strokeWidth="1.5"
-          fill="rgba(234, 255, 0, 0.06)"
+          fill={`rgba(${r},${g},${b},0.06)`}
           animate={{ x: [30, 40, 30], y: [20, 30, 20] }}
           transition={{
             duration: 4,
@@ -93,9 +96,9 @@ function ProjectCard({
           cx="140"
           cy="60"
           r="25"
-          stroke="rgba(234, 255, 0, 0.3)"
+          stroke={`rgba(${r},${g},${b},0.3)`}
           strokeWidth="1.5"
-          fill="rgba(234, 255, 0, 0.04)"
+          fill={`rgba(${r},${g},${b},0.04)`}
           animate={{ r: [25, 30, 25] }}
           transition={{
             duration: 3,
@@ -196,8 +199,8 @@ function ProjectCard({
             background:
               msg.align === "left"
                 ? "rgba(255, 255, 255, 0.06)"
-                : "rgba(234, 255, 0, 0.1)",
-            border: `1px solid ${msg.align === "right" ? "rgba(234, 255, 0, 0.15)" : "rgba(255, 255, 255, 0.06)"}`,
+                : `rgba(${r},${g},${b},0.1)`,
+            border: `1px solid ${msg.align === "right" ? `rgba(${r},${g},${b},0.15)` : "rgba(255, 255, 255, 0.06)"}`,
           }}
           animate={{
             opacity: [0, 1],

@@ -1,12 +1,14 @@
 "use client";
 
 import { personalInfo } from "@/lib/data";
+import { useTheme } from "@/components/theme-provider";
 import { motion } from "motion/react";
 import { useEffect, useRef } from "react";
 import ShinyText from "./shiny-text";
 
 function OscilloscopeCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { accentRgb } = useTheme();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -24,12 +26,13 @@ function OscilloscopeCanvas() {
     let time = 0;
 
     const draw = () => {
+      const { r, g, b } = accentRgb;
       const w = rect.width;
       const h = rect.height;
       ctx.clearRect(0, 0, w, h);
 
       // Draw grid lines
-      ctx.strokeStyle = "rgba(234, 255, 0, 0.06)";
+      ctx.strokeStyle = `rgba(${r},${g},${b},0.06)`;
       ctx.lineWidth = 0.5;
       for (let x = 0; x < w; x += 30) {
         ctx.beginPath();
@@ -45,7 +48,7 @@ function OscilloscopeCanvas() {
       }
 
       // Draw main waveform
-      ctx.strokeStyle = "rgba(234, 255, 0, 0.8)";
+      ctx.strokeStyle = `rgba(${r},${g},${b},0.8)`;
       ctx.lineWidth = 1.5;
       ctx.beginPath();
       for (let x = 0; x < w; x++) {
@@ -61,7 +64,7 @@ function OscilloscopeCanvas() {
       ctx.stroke();
 
       // Draw secondary waveform (dotted)
-      ctx.strokeStyle = "rgba(234, 255, 0, 0.2)";
+      ctx.strokeStyle = `rgba(${r},${g},${b},0.2)`;
       ctx.lineWidth = 1;
       ctx.setLineDash([2, 4]);
       ctx.beginPath();
@@ -83,7 +86,7 @@ function OscilloscopeCanvas() {
 
     draw();
     return () => cancelAnimationFrame(animationId);
-  }, []);
+  }, [accentRgb]);
 
   return (
     <canvas

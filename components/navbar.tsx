@@ -1,6 +1,7 @@
 "use client";
 
 import { navLinks, personalInfo } from "@/lib/data";
+import { ColorPicker } from "@/components/color-picker";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import Link from "next/link";
 import { useState } from "react";
@@ -52,6 +53,8 @@ export function Navbar() {
               {link.label}
             </a>
           ))}
+          <div className="w-px h-5 bg-border mx-1" />
+          <ColorPicker />
         </div>
 
         {/* Resume CTA */}
@@ -72,13 +75,15 @@ export function Navbar() {
           </a>
         </div>
 
-        {/* Mobile hamburger */}
-        <button
-          type="button"
-          className="md:hidden flex flex-col gap-1.5 p-2"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-        >
+        {/* Mobile: color picker + hamburger */}
+        <div className="md:hidden flex items-center gap-1">
+          <ColorPicker />
+          <button
+            type="button"
+            className="flex flex-col gap-1.5 p-2"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+          >
           <span
             className={`w-5 h-px bg-foreground transition-transform duration-200 ${mobileOpen ? "rotate-45 translate-y-[3.5px]" : ""}`}
           />
@@ -89,6 +94,7 @@ export function Navbar() {
             className={`w-5 h-px bg-foreground transition-transform duration-200 ${mobileOpen ? "-rotate-45 -translate-y-[3.5px]" : ""}`}
           />
         </button>
+        </div>
       </nav>
 
       {/* Mobile menu */}

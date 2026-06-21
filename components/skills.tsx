@@ -3,6 +3,7 @@
 import { AnimatedSection } from "@/components/animated-section";
 import { SectionHeader } from "@/components/section-header";
 import { skills } from "@/lib/data";
+import { useTheme } from "@/components/theme-provider";
 import { motion, useInView } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { GitHubCalendar } from "react-github-calendar";
@@ -255,6 +256,8 @@ function GitHubContributions() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-40px" });
   const [mounted, setMounted] = useState(false);
+  const { accentRgb } = useTheme();
+  const { r, g, b } = accentRgb;
 
   useEffect(() => {
     setMounted(true);
@@ -297,10 +300,10 @@ function GitHubContributions() {
             theme={{
               dark: [
                 "rgba(255, 255, 255, 0.04)",
-                "rgba(234, 255, 0, 0.15)",
-                "rgba(234, 255, 0, 0.3)",
-                "rgba(234, 255, 0, 0.55)",
-                "rgba(234, 255, 0, 0.85)",
+                `rgba(${r},${g},${b},0.15)`,
+                `rgba(${r},${g},${b},0.3)`,
+                `rgba(${r},${g},${b},0.55)`,
+                `rgba(${r},${g},${b},0.85)`,
               ],
             }}
             style={{
