@@ -26,7 +26,7 @@ export const accentPalette: AccentColor[] = [
 const DEFAULT_ACCENT = accentPalette[0].hex;
 const STORAGE_KEY = "portfolio-accent";
 
-function hexToRgb(hex: string): { r: number; g: number; b: number } {
+export function hexToRgb(hex: string): { r: number; g: number; b: number } {
   const clean = hex.replace("#", "");
   return {
     r: Number.parseInt(clean.slice(0, 2), 16),
@@ -35,10 +35,23 @@ function hexToRgb(hex: string): { r: number; g: number; b: number } {
   };
 }
 
+function buildCssVars(hex: string): Record<string, string> {
+  const { r, g, b } = hexToRgb(hex);
+  return {
+    "--accent": hex,
+    "--accent-r": String(r),
+    "--accent-g": String(g),
+    "--accent-b": String(b),
+    "--accent-dim": `rgba(${r},${g},${b},0.15)`,
+    "--accent-glow": `rgba(${r},${g},${b},0.06)`,
+    "--border-accent": `rgba(${r},${g},${b},0.3)`,
+  };
+}
+
 interface ThemeContextValue {
   accent: string;
   accentRgb: { r: number; g: number; b: number };
-  setAccent: (hex: string) => void;
+  setAccent: (hex: string, origin?: { x: number; y: number }) => void;
   palette: AccentColor[];
 }
 
@@ -61,18 +74,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const applyCssVars = useCallback((hex: string) => {
-    const { r, g, b } = hexToRgb(hex);
+    const vars = buildCssVars(hex);
     const root = document.documentElement;
-    root.style.setProperty("--accent", hex);
-    root.style.setProperty("--accent-r", String(r));
-    root.style.setProperty("--accent-g", String(g));
-    root.style.setProperty("--accent-b", String(b));
-    root.style.setProperty("--accent-dim", `rgba(${r},${g},${b},0.15)`);
-    root.style.setProperty("--accent-glow", `rgba(${r},${g},${b},0.06)`);
-    root.style.setProperty(
-      "--border-accent",
-      `rgba(${r},${g},${b},0.3)`
-    );
+    for (const [key, value] of Object.entries(vars)) {
+      root.style.setProperty(key, value);
+    }
   }, []);
 
   useEffect(() => {
@@ -80,11 +86,28 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, [accent, applyCssVars]);
 
   const setAccent = useCallback(
-    (hex: string) => {
-      setAccentState(hex);
-      localStorage.setItem(STORAGE_KEY, hex);
+    (hex: string, origin?: { x: number; y: number }) => {
+      if (hex === accent) return;
+
+      // Store click coordinates for the view-transition CSS
+      if (origin) {
+        document.documentElement.style.setProperty("--vt-x", `${origin.x}px`);
+        document.documentElement.style.setProperty("--vt-y", `${origin.y}px`);
+      }
+
+      const doSwitch = () => {
+        applyCssVars(hex);
+        setAccentState(hex);
+        localStorage.setItem(STORAGE_KEY, hex);
+      };
+
+      if (origin && document.startViewTransition) {
+        document.startViewTransition(() => doSwitch());
+      } else {
+        doSwitch();
+      }
     },
-    []
+    [accent, applyCssVars]
   );
 
   const accentRgb = hexToRgb(accent);

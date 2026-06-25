@@ -50,8 +50,13 @@ export function ColorPicker() {
               <button
                 key={c.hex}
                 type="button"
-                onClick={() => {
-                  setAccent(c.hex);
+                onClick={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const origin = {
+                    x: rect.left + rect.width / 2,
+                    y: rect.top + rect.height / 2,
+                  };
+                  setAccent(c.hex, origin);
                   setOpen(false);
                 }}
                 className="relative flex items-center justify-center w-6 h-6 rounded-full transition-transform hover:scale-110 focus:outline-none"
