@@ -97,10 +97,10 @@ const skillIcons: Record<string, typeof SiGo> = {
   // Databased
   "MongoDB": SiMongodb,
   "PostgreSQL": SiPostgresql,
-  "Vector Databases": Database, 
+  "Vector Databases (Qdrant, ChromaDB)": Database, 
   // Languages
   TypeScript: SiTypescript,
-  Javascript: SiJavascript,
+  JavaScript: SiJavascript,
   Go: SiGo,
   Python: SiPython,
   "C++": SiCplusplus,
